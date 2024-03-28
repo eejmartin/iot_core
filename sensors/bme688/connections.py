@@ -3,8 +3,15 @@ import network
 import constants
 
 def connect_wlan():
+    """
+    Connects to a Wi-Fi network using the provided SSID and password.
+
+    Raises:
+        Exception: If there is an issue connecting to the Wi-Fi network.
+
+    """
     try:        
-        #Connect to WLAN
+        # Connect to WLAN
         wlan = network.WLAN(network.STA_IF)
         wlan.active(True)
         if not wlan.isconnected():

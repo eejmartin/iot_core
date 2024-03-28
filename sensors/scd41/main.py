@@ -19,6 +19,15 @@ breakout_scd41.start()
 led = machine.Pin('LED', machine.Pin.OUT)
 
 def read_pem(file):
+    """
+    Read a PEM file and return its content as bytes.
+
+    Args:
+        file (str): The path to the PEM file.
+
+    Returns:
+        bytes: The content of the PEM file as bytes.
+    """
     with open(file, "r") as input:
         text = input.read().strip()
         split_text = text.split("\n")
@@ -26,6 +35,19 @@ def read_pem(file):
         return ubinascii.a2b_base64(base64_text)
     
 def publish_sensor_values():
+    """
+    Continuously measure sensor values and publish them to an MQTT broker.
+
+    This function reads the CO2, temperature, and humidity values from the SCD41 sensor,
+    formats them into a JSON payload, and publishes the payload to the MQTT broker.
+    The function also controls an LED to indicate the publishing status.
+
+    Note:
+        This function runs in an infinite loop and should be executed in a separate thread.
+
+    Raises:
+        Exception: If there is an error while measuring or publishing the sensor values.
+    """
     while True:
         co2, temperature, humidity = breakout_scd41.measure()
         led.value(True)

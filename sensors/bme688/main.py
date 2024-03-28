@@ -18,6 +18,15 @@ bme = BreakoutBME68X(i2c)
 led = machine.Pin('LED', machine.Pin.OUT)
 
 def read_pem(file):
+    """
+    Read a PEM file and convert it to binary format.
+
+    Args:
+        file (str): The path to the PEM file.
+
+    Returns:
+        bytes: The binary representation of the PEM file.
+    """
     with open(file, "r") as input:
         text = input.read().strip()
         split_text = text.split("\n")
@@ -25,6 +34,15 @@ def read_pem(file):
         return ubinascii.a2b_base64(base64_text)
     
 def publish_sensor_values():
+    """
+    Publish sensor values to an MQTT broker.
+
+    This function reads the sensor values from the BME688 sensor and publishes them to an MQTT broker.
+    The sensor values are published in a JSON format.
+
+    Note:
+        This function runs in an infinite loop and publishes the sensor values every 10 seconds.
+    """
     while True:
         temperature, pressure, humidity, gas, status, _, _ = bme.read()
         if status & STATUS_HEATER_STABLE:
@@ -61,20 +79,16 @@ mqtt_client = MQTTClient(
     },
 )
 
-try:
-    led.value(True)
-    print(f"Connecting WLAN")
-    connections.connect_wlan()
-    print(f"Done Connecting")
-    led.value(False)
+print(f"Connecting WLAN")
+connections.connect_wlan()
+print(f"Done Connecting")
 
-    led.value(True)
-    print(f"Connecting to MQTT broker")
-    mqtt_client.connect()
-    print("Done Connecting, sending Values")
-    led.value(False)
 
-    print("Start publishing sensor values")
-    publish_sensor_values()
-except KeyboardInterrupt:
-    machine.reset()
+led.value(True)
+print(f"Connecting to MQTT broker")
+mqtt_client.connect()
+print("Done Connecting, sending Values")
+led.value(False)
+
+print("Start publishing sensor values")
+publish_sensor_values()
