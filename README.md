@@ -9,3 +9,5 @@ This folder contains the code for AWS Lambda functions that process the data rec
 ## Sensors Folder
 
 This folder contains the code for setting up and interacting with the sensors connected to the Raspberry Pi Pico W.
+- SCD41: A sensor from Pimoroni for measuring CO2, temperature, and humidity.
+- BME688: A sensor from Pimoroni for measuring temperature, humidity, pressure, and gas resistance.
