@@ -7,8 +7,8 @@ import ustruct as struct
 import constants
 
 # wintertime / Summerzeit
-GMT_OFFSET = 3600 * 1 # 3600 = 1 h (wintertime)
-#GMT_OFFSET = 3600 * 2 # 3600 = 1 h (summertime)
+#GMT_OFFSET = 3600 * 1 # 3600 = 1 h (wintertime)
+GMT_OFFSET = 3600 * 2 # 3600 = 1 h (summertime)
 
 # NTP-Host
 NTP_HOST = constants.NTP_HOST
