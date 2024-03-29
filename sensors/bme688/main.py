@@ -9,6 +9,7 @@ from breakout_bme68x import BreakoutBME68X, STATUS_HEATER_STABLE
 from pimoroni_i2c import PimoroniI2C
 import connections
 import constants
+import sync_rtc
 
 PINS_PICO_SENSOR = {"sda": 4, "scl": 5}
 
@@ -83,6 +84,9 @@ print(f"Connecting WLAN")
 connections.connect_wlan()
 print(f"Done Connecting")
 
+print(f"Updating RTC")
+sync_rtc.setTimeRTC()
+print(f"Updated RTC")
 
 led.value(True)
 print(f"Connecting to MQTT broker")
