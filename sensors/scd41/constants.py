@@ -3,6 +3,7 @@ import machine
 
 SSID = ""  # Network name
 PASSWORD = ""  # WiFi password
+NTP_HOST = 'pool.ntp.org'
 
 MQTT_CLIENT_ID = ubinascii.hexlify(machine.unique_id())
 MQTT_CLIENT_KEY = "*****-private.pem.key"
