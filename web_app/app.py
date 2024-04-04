@@ -6,7 +6,7 @@ import seaborn as sns
 from datetime import datetime
 
 # Title of our app
-st.title("Data Display from Sensors")
+st.title("Visualization for Sensor Data collected from BME680 Sensor and SCD41 Sensor")
 
 csvFile = pd.read_csv('./sensor_data.csv')
 
